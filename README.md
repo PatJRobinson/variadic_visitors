@@ -31,7 +31,7 @@ Every time we need to make decisions at runtime, there is going to be some branc
     }, v_input, v_output);
 ```
 
-So this is pretty great. Since we only have a few possible types each inputs and outputs, and they are known at compile time, creating a virtual base class for each, leaving the runtime to consult the V-Table to find the correct function override for each reader and writer on every iteration indeed seems a bit overkill. Moreover, this strategy would result in pretty *inexpressive* code: by looking only at the function, how can one tell what counts as an 'Input' or 'Output' type? This visitor implementation handles both of those concerns by (in the first case) moving our loop inside the function overload so that the branching happens only once and (in the second) it is plainly obvious which types this call is supposed to serve, since they are held in another type called a variant. 
+So this is pretty great. Since we only have a few possible types each of inputs and outputs, and they are known at compile time, creating a virtual base class for each, leaving the runtime to consult the V-Table to find the correct function override for each reader and writer on every iteration indeed seems a bit overkill. Moreover, this strategy would result in pretty *inexpressive* code: by looking only at the function, how can one tell what counts as an 'Input' or 'Output' type? This visitor implementation handles both of those concerns by (in the first case) moving our loop inside the function overload so that the branching happens only once and (in the second) it is plainly obvious which types this call is supposed to serve, since they are held in another type called a variant. 
 
 Perfect, so why did make my own? 
 
@@ -51,5 +51,3 @@ cd build
 cmake ..
 ./variadic
 ```
-
-The program will print out the types of the arguments passed to the function, and then print out the types of the arguments passed to the next function in the chain.
